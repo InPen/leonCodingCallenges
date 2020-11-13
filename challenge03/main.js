@@ -5,16 +5,26 @@
 //Make sure that you don't count duplicates; for example solve([[1,2],[4,4],[5,6,6]]) = 4, since the extra outcomes are just duplicates.
 
 //sudo:
-//select one index in an array
-//formed by picking 1 element PER array FROM subArray
-//count how many uniqueArrs we can make
-//return uniqueArrs
+//Get the all arrays in an array.
+//Recursion is used to solve the problem. The base condition is, When the length of the array reduces to one then return that element of the array. Else
+//Call recursion after leaving the first element of the array and store the result in variable(otherCases).
+//Loop through every element of the Array(otherCases) and inside every element loop through the first element of the Array(arr).
+//Concatenate every element of the Array(arr[0]) with the Array(otherCases) and push the result in answer array.
 
-
-let arrArrs = [[1,2],[4],[5,6]]
 function solve(arr) {
-  console.log(arrArrs[1][0])
-  // return 0;
-};
+  if (arr.length == 1) {
+    return arr[0];
+  } else {
+    let comboArr = []
+// recur with the rest of the array.
+    let otherCases = solve(arr.slice(1));
+    for (let i = 0; i < otherCases.length; i++) {
+    for (let j = 0; j < arr[0].length; j++) {
+      comboArr.push(arr[0][j] + otherCases[i]);
+    }
+  }
+  return comboArr
+}
+}
 
 solve([[1,2],[4],[5,6]]) // = 4
